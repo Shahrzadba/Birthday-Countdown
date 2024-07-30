@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 
 # Function to calculate the countdown
+@st.cache(allow_output_mutation=True)
 def calculate_countdown(birthday_date):
     now = datetime.now()
     # If the birthday has already passed this year, set it to next year
@@ -21,7 +22,6 @@ st.title("Birthday Countdown")
 
 col1, col2 = st.columns(2)
 
-
 col1.write("Counting down to Tina's birthday on August 15!")
 
 # Display the countdown
@@ -35,13 +35,8 @@ if countdown.days == 0 and countdown.seconds <= 86400:
     st.balloons()
     st.write("🎉 Happy Birthday! 🎉")
 
-# HTML and CSS to position the image and icons
-
-
 # Display image and icons
-col2.image( image='Tina.jpg')
-
-
+col2.image('Tina.jpg')
 
 # Optionally, you can add a button to refresh the countdown
 if st.button("Refresh Countdown"):

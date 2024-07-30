@@ -22,7 +22,7 @@ st.title("Birthday Countdown")
 col1, col2 = st.columns(2)
 
 
-col1.write("Counting down to Tina's birthday on August 15, 2024!")
+col1.write("Counting down to Tina's birthday on August 15!")
 
 # Display the countdown
 col1.metric(label="Days", value=countdown.days)

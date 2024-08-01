@@ -13,16 +13,17 @@ def calculate_countdown(birthday_date):
 # Set the date of the birthday
 birthday_date = datetime(2024, 8, 15)  # Change this to your friend's birthday
 
-# Calculate the countdown
-if 'countdown' not in st.session_state:
-    st.session_state.countdown = calculate_countdown(birthday_date)
-
 # Streamlit app
 st.title("Birthday Countdown")
 
 col1, col2 = st.columns(2)
 
 col1.write("Counting down to Tina's birthday on August 15!")
+
+# Initialize session state if not present
+if 'countdown' not in st.session_state or st.session_state.refresh:
+    st.session_state.countdown = calculate_countdown(birthday_date)
+    st.session_state.refresh = False
 
 # Display the countdown
 countdown = st.session_state.countdown
@@ -41,5 +42,6 @@ col2.image('Tina.jpg')
 
 # Optionally, you can add a button to refresh the countdown
 if st.button("Refresh Countdown"):
-    st.session_state.countdown = calculate_countdown(birthday_date)
-    st.experimental_rerun()
+    st.session_state.refresh = True
+    # We don't need st.experimental_rerun() here because the `if` condition will handle the refresh
+    st.write("Countdown refreshed!")
